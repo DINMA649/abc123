@@ -35,7 +35,7 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: hello-world649.azurewebsites.net
     
     steps:
       - name: Download artifact from build job
@@ -50,5 +50,5 @@ jobs:
         with:
           app-name: 'hello-world649'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_583D6FE7D79147F3A6053E799A9F4D00 }}
+          publish-profile: <publishData><publishProfile profileName="hello-world649 - Web Deploy" publishMethod="MSDeploy" publishUrl="hello-world649.scm.azurewebsites.net:443" msdeploySite="hello-world649" userName="$hello-world649" userPWD="brLAbqJbmreevyvsMGzX0yr1F9BTs3pL2S0YGxlau1WBPyZiiJkkvo0Zv1D1" destinationAppUrl="https://hello-world649.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="hello-world649 - FTP" publishMethod="FTP" publishUrl="ftps://waws-prod-blu-435.ftp.azurewebsites.windows.net/site/wwwroot" ftpPassiveMode="True" userName="hello-world649\$hello-world649" userPWD="brLAbqJbmreevyvsMGzX0yr1F9BTs3pL2S0YGxlau1WBPyZiiJkkvo0Zv1D1" destinationAppUrl="https://hello-world649.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="hello-world649 - Zip Deploy" publishMethod="ZipDeploy" publishUrl="hello-world649.scm.azurewebsites.net:443" userName="$hello-world649" userPWD="brLAbqJbmreevyvsMGzX0yr1F9BTs3pL2S0YGxlau1WBPyZiiJkkvo0Zv1D1" destinationAppUrl="https://hello-world649.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile></publishData>
           package: '*.jar'

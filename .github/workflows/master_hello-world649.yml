@@ -35,7 +35,7 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: hello-world649.azurewebsites.net
+      url: https://hello-world649.azurewebsites.net/
     
     steps:
       - name: Download artifact from build job

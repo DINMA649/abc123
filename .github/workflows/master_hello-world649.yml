@@ -35,14 +35,13 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: https://hello-world649.azurewebsites.net/
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -50,5 +49,5 @@ jobs:
         with:
           app-name: 'hello-world649'
           slot-name: 'Production'
-          publish-profile: <publishData><publishProfile profileName="hello-world649 - Web Deploy" publishMethod="MSDeploy" publishUrl="hello-world649.scm.azurewebsites.net:443" msdeploySite="hello-world649" userName="$hello-world649" userPWD="brLAbqJbmreevyvsMGzX0yr1F9BTs3pL2S0YGxlau1WBPyZiiJkkvo0Zv1D1" destinationAppUrl="https://hello-world649.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="hello-world649 - FTP" publishMethod="FTP" publishUrl="ftps://waws-prod-blu-435.ftp.azurewebsites.windows.net/site/wwwroot" ftpPassiveMode="True" userName="hello-world649\$hello-world649" userPWD="brLAbqJbmreevyvsMGzX0yr1F9BTs3pL2S0YGxlau1WBPyZiiJkkvo0Zv1D1" destinationAppUrl="https://hello-world649.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="hello-world649 - Zip Deploy" publishMethod="ZipDeploy" publishUrl="hello-world649.scm.azurewebsites.net:443" userName="$hello-world649" userPWD="brLAbqJbmreevyvsMGzX0yr1F9BTs3pL2S0YGxlau1WBPyZiiJkkvo0Zv1D1" destinationAppUrl="https://hello-world649.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile></publishData>
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_87350B57CD90458DAF06B61E64F71015 }}
           package: '*.jar'

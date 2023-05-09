@@ -1,7 +1,7 @@
 name: Build and deploy JAR app to Azure Web App - web-app-service-without-connection
 
 on:
-  pull_request:
+  push:
     branches:
       - master
   workflow_dispatch:

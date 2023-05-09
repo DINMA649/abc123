@@ -32,7 +32,7 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: https://web-app-service-without-connection.azurewebsites.net
+      url: ${{ env.PROD_URL }}
     
     steps:
       - name: Download artifact from build job

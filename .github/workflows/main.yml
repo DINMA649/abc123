@@ -1,0 +1,50 @@
+name: a650
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Java version
+        uses: actions/setup-java@v1
+        with:
+          java-version: '8'
+
+      - name: Build using Maven
+        run: mvn clean install
+
+      - name: Upload artifact for deployment
+        uses: actions/upload-artifact@v2
+        with:
+          name: java-app
+          path: '${{ github.workspace }}/target/*.jar'
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ env.FL_URL }}
+    
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: java-app
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'a650'
+          slot-name: 'Production'
+          publish-profile: <publishData><publishProfile profileName="a650 - Web Deploy" publishMethod="MSDeploy" publishUrl="a650.scm.azurewebsites.net:443" msdeploySite="a650" userName="$a650" userPWD="zREQJon0gzDfGvJ7b4r8bZ2z2aK4b1rnctqcYMrthD8hgDFFJoje4gmKrtdb" destinationAppUrl="https://a650.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="a650 - FTP" publishMethod="FTP" publishUrl="ftps://waws-prod-blu-435.ftp.azurewebsites.windows.net/site/wwwroot" ftpPassiveMode="True" userName="a650\$a650" userPWD="zREQJon0gzDfGvJ7b4r8bZ2z2aK4b1rnctqcYMrthD8hgDFFJoje4gmKrtdb" destinationAppUrl="https://a650.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="a650 - Zip Deploy" publishMethod="ZipDeploy" publishUrl="a650.scm.azurewebsites.net:443" userName="$a650" userPWD="zREQJon0gzDfGvJ7b4r8bZ2z2aK4b1rnctqcYMrthD8hgDFFJoje4gmKrtdb" destinationAppUrl="https://a650.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile></publishData>
+          package: '*.jar'

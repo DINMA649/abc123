@@ -5,7 +5,7 @@
 	<groupId>orbartal</groupId>
 	<artifactId>example.smallest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>ear</packaging>
+	<packaging>war</packaging>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -16,16 +16,15 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ear-plugin</artifactId>
-				<version>3.2.0</version>
-				<configuration>
-					<finalName>example.smallest</finalName>
-					<version>7</version>
-					<defaultLibBundleDir>lib</defaultLibBundleDir>
-				</configuration>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+			<plugin>
+        			<groupId>org.apache.maven.plugins</groupId>
+        			<artifactId>maven-war-plugin</artifactId>
+        			<version>3.2.3</version>
+            </plugin>
+        </plugins>
 	</build>
 
 	<dependencies>

@@ -25,7 +25,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.ear'
+          path: '${{ github.workspace }}/target/*.war'
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,4 +47,4 @@ jobs:
           app-name: 'app-no-connection'
           slot-name: 'Production'
           publish-profile: <publishData><publishProfile profileName="app-no-connection - Web Deploy" publishMethod="MSDeploy" publishUrl="app-no-connection.scm.azurewebsites.net:443" msdeploySite="app-no-connection" userName="$app-no-connection" userPWD="tC5hkjL9bnKs2Emqez2E4j2Dh3tNsmS4YGxwvubY2Zcp1JupQtKPthzLZplQ" destinationAppUrl="https://app-no-connection.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="app-no-connection - FTP" publishMethod="FTP" publishUrl="ftps://waws-prod-blu-435.ftp.azurewebsites.windows.net/site/wwwroot" ftpPassiveMode="True" userName="app-no-connection\$app-no-connection" userPWD="tC5hkjL9bnKs2Emqez2E4j2Dh3tNsmS4YGxwvubY2Zcp1JupQtKPthzLZplQ" destinationAppUrl="https://app-no-connection.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile><publishProfile profileName="app-no-connection - Zip Deploy" publishMethod="ZipDeploy" publishUrl="app-no-connection.scm.azurewebsites.net:443" userName="$app-no-connection" userPWD="tC5hkjL9bnKs2Emqez2E4j2Dh3tNsmS4YGxwvubY2Zcp1JupQtKPthzLZplQ" destinationAppUrl="https://app-no-connection.azurewebsites.net" SQLServerDBConnectionString="" mySQLDBConnectionString="" hostingProviderForumLink="" controlPanelLink="http://windows.azure.com" webSystem="WebSites"><databases /></publishProfile></publishData>
-          package: '*.ear'
+          package: '*.war'
